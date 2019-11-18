@@ -82,10 +82,28 @@
 <script type="text/javascript">
 var canvas;
 var canvasContext
-var ballX = 20;
-var speedballX = 20;
-var x;
-var y;
+var ballX = 50;
+var ballY = 50;
+var speedballX = 10;
+var speedballY = 4;
+var paddle1Y = 250;
+var paddle2Y = 250;
+const paddleheight  = 100;
+const paddlethickness = 10;
+var playerscore = 0;
+var computerscore = 0;
+const winning_score = 5;
+
+  function calculateMousePos(evt) {
+	var rect = canvas.getBoundingClientRect();
+	var root = document.documentElement;
+	var mouseX = evt.clientX - rect.left - root.scrollLeft;
+	var mouseY = evt.clientY - rect.top - root.scrollTop;
+	return {
+		x:mouseX,
+		y:mouseY
+	};
+}
 
 
 window.onload = function() {
@@ -99,15 +117,79 @@ window.onload = function() {
     drawEverything();
 
   },1000/framepersec );
+  canvas.addEventListener('mousemove',
+                          function(evt)  {
+    var mousePos = calculateMousePos(evt);
+    paddle1y = mousePos.y-(paddleheight/2);
+  });
 }
+  
+ function ballReset() {
+	if(playerscore >= winning_score)
+		if(computerscore >= winning_score) {
+		playerscore = 0;
+		computerscore = 0;
+	}
+	speedballX = -speedballX;
+	speedballY = -speedballY;
+	ballX = canvas.width/2;
+	ballY = canvas.height/2;
+   
+ }
 function moveEverything() {
-  ballX = ballX + speedballX;
-  if(ballX > 800){
-    speedballX = -speedballX
-    }
-  if(ballX <= 0){
-    speedballX = speedballX + 2
-  }
+ computerMovement(); 
+	ballX+=speedballX;
+	ballY+=speedballY;
+
+	if(ballX < 0) {
+		if(ballY > paddle1Y &&
+			ballY < paddle1Y+paddleheight) {
+			speedballX = -speedballX;
+
+		
+					
+			
+
+		} else {
+			computerscore+=1;
+			ballReset();
+			
+			
+			
+		}
+				
+				
+				
+				
+
+		}
+	if(ballX > canvas.width) {
+		if(ballY > paddle2Y &&
+			ballY < paddle2Y+paddleheight) {
+			speedballX= -speedballX;
+
+			
+
+		} else {
+				playerscore+=1;
+				ballReset();
+				
+				
+				
+			}
+				
+
+				
+	}
+	if(ballY < 0) {
+		speedballY = -speedballY;
+
+		}
+	if(ballY > canvas.height) {
+		speedballY = -speedballY;
+
+	}
+}
 
 }
 function drawEverything() {
@@ -123,7 +205,15 @@ function drawEverything() {
 
   //this line makes out ball
   colorCircle(ballX,120,10,'green');
-
+  
+  
+  // these lines makes the score tables
+  canvasContext.fillText(playerscore,270,90)
+	canvasContext.fillText("Wynik gracza:",200,90)
+	canvasContext.fillText("Wynik komputera:",520,90)
+	canvasContext.fillText(computerscore, 610,90)
+  
+ //simpliest way to fill the canvas 
 function colorCircle(positionX,positionY,radious,drawColor) {
   canvasContext.fillStyle = drawColor;
   canvasContext.beginPath();
