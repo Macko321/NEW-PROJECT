@@ -93,7 +93,10 @@ const paddlethickness = 10;
 var playerscore = 0;
 var computerscore = 0;
 const winning_score = 5;
-	
+
+
+
+
 function calculateMousePos(evt) {
 	var rect = canvas.getBoundingClientRect();
 	var root = document.documentElement;
@@ -106,24 +109,27 @@ function calculateMousePos(evt) {
 }
 
 
+
 window.onload = function() {
-  canvas = document.getElementById('gameCanvas');
-  canvasContext = canvas.getContext('2d');
+	canvas = document.getElementById('gameCanvas');
+	canvasContext = canvas.getContext('2d');
 
 
-  var framepersec = 30;
-  setInterval(function() {
-    moveEverything();
-    drawEverything();
+	var framepersec = 30;
+	setInterval(function() {
+		moveEverything();
+		drawEverything();
 
-  },1000/framepersec );
-  canvas.addEventListener('mousemove',
-                          function(evt)  {
-    var mousePos = calculateMousePos(evt);
-    paddle1y = mousePos.y-(paddleheight/2);
-  });
+	},1000/framepersec );
+
+	canvas.addEventListener('mousemove',
+		function(evt)	{
+			var mousePos = calculateMousePos(evt);
+			paddle1Y = mousePos.y-(paddleheight/2);
+		});	
+
 }
-  
+
 function ballReset() {
 	if(playerscore >= winning_score)
 		if(computerscore >= winning_score) {
@@ -134,10 +140,19 @@ function ballReset() {
 	speedballY = -speedballY;
 	ballX = canvas.width/2;
 	ballY = canvas.height/2;
-   
- }
+}
+
+function computerMovement() {
+	var paddle2YCenter = paddle2Y + (paddleheight/2);
+	 if(paddle2YCenter < ballY-20) {
+	 	paddle2Y+=5;
+	 } else if(paddle2YCenter > ballY+20)
+	 	paddle2Y-=5;
+	 	
+}
 function moveEverything() {
- computerMovement(); 
+
+	computerMovement(); 
 	ballX+=speedballX;
 	ballY+=speedballY;
 
@@ -190,40 +205,39 @@ function moveEverything() {
 
 	}
 }
-
-}
 function drawEverything() {
 
-  //next line blank out the screen blue colour
-  colorRect(0,0, canvas.width,canvas.height,'#ff4c68');
+	//next line blank out the screen black colour
+	colorRect(0,0, canvas.width,canvas.height,'#ff4c68');
 
-  //next line makes left arm
-  colorRect(0,210,10,200,'white')
+	//next line makes left arm
+	colorRect(0,paddle1Y,paddlethickness,
+		paddleheight,'white')
 
-  //next line makes right arm
-  colorRect(790,210,10,200,'white');
+	//next line makes right arm
+	colorRect(canvas.width-paddlethickness,paddle2Y,
+		paddlethickness,paddleheight,'white');
 
-  //this line makes out ball
-  colorCircle(ballX,120,10,'green');
-  
-  
-  // these lines makes the score tables
-  canvasContext.fillText(playerscore,270,90)
+	//this line makes out ball
+	colorCircle(ballX,ballY,10,'green');
+
+	
+	canvasContext.fillText(playerscore,270,90)
 	canvasContext.fillText("Wynik gracza:",200,90)
 	canvasContext.fillText("Wynik komputera:",520,90)
 	canvasContext.fillText(computerscore, 610,90)
-  
- //simpliest way to fill the canvas 
+	
 function colorCircle(positionX,positionY,radious,drawColor) {
-  canvasContext.fillStyle = drawColor;
-  canvasContext.beginPath();
-  canvasContext.arc(positionX,positionY,radious,Math.PI*2,true,drawColor);
-  canvasContext.fill()
+	canvasContext.fillStyle = drawColor;
+	canvasContext.beginPath();
+	canvasContext.arc(positionX,positionY,radious,Math.PI*2,true,drawColor);
+	canvasContext.fill()
 }
 }
 function colorRect(leftX,topY, width,height,drawColor) {
-  canvasContext.fillStyle = drawColor;
-  canvasContext.fillRect(leftX,topY, width,height);
+	canvasContext.fillStyle = drawColor;
+	canvasContext.fillRect(leftX,topY, width,height);
+}
 }
 </script>
 </section>
