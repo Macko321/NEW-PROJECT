@@ -93,8 +93,8 @@ const paddlethickness = 10;
 var playerscore = 0;
 var computerscore = 0;
 const winning_score = 5;
-
-  function calculateMousePos(evt) {
+	
+function calculateMousePos(evt) {
 	var rect = canvas.getBoundingClientRect();
 	var root = document.documentElement;
 	var mouseX = evt.clientX - rect.left - root.scrollLeft;
@@ -124,7 +124,7 @@ window.onload = function() {
   });
 }
   
- function ballReset() {
+function ballReset() {
 	if(playerscore >= winning_score)
 		if(computerscore >= winning_score) {
 		playerscore = 0;
