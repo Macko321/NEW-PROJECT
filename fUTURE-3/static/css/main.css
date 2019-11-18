@@ -84,8 +84,10 @@ h5{
 
 }
 #gameCanvas{
-  margin: 7% 20%;
-  margin-bottom: : 5px;
+  position: relative;
+  margin-top: 40px;
+  margin-right: 20%;
+  margin-left: 25%;
 
 }
 #features {
