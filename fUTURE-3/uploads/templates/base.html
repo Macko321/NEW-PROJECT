@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>80s</title>
+  <!--Google Fonts-->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/22f58680a1.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,400,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static '/css/main.css' %}">
+</head>
+
+<body>
+
+  <section id="title">
+    <div class="container-fluid">
+
+
+      <!-- Nav Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+
+        <a class="navbar-brand" href="">fUTURE</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#footer"> Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#pricing"> Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#cta"> Download</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#game"> Game</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+
+
+
+
+      <!-- Title -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h1>Best game on the whole world.</h1>
+            <button type="button" class="btn btn-dark btn-lg download-button"><i class="fab fa-apple"></i> Download</button>
+            <button type="button" class="btn btn-outline-dark btn-lg download-button"><i class="fab fa-google-play"></i> Download</button>
+          </div>
+          <div class="col-lg-6">
+            <img class="title-image" src="/static/images/Computer.jpg" alt="Computer">
+          </div>
+      </div>
+    </div>
+
+
+
+  </section>
+
+
+<section>
+<canvas id = "gameCanvas" width = "800" height="600"></canvas>
+
+<script type="text/javascript">
+var canvas;
+var canvasContext
+var ballX = 20;
+var speedballX = 20;
+var x;
+var y;
+
+
+window.onload = function() {
+  canvas = document.getElementById('gameCanvas');
+  canvasContext = canvas.getContext('2d');
+
+
+  var framepersec = 30;
+  setInterval(function() {
+    moveEverything();
+    drawEverything();
+
+  },1000/framepersec );
+}
+function moveEverything() {
+  ballX = ballX + speedballX;
+  if(ballX > 800){
+    speedballX = -speedballX
+    }
+  if(ballX <= 0){
+    speedballX = speedballX + 2
+  }
+
+}
+function drawEverything() {
+
+  //next line blank out the screen blue colour
+  colorRect(0,0, canvas.width,canvas.height,'#ff4c68');
+
+  //next line makes left arm
+  colorRect(0,210,10,200,'white')
+
+  //next line makes right arm
+  colorRect(790,210,10,200,'white');
+
+  //this line makes out ball
+  colorCircle(ballX,120,10,'green');
+
+function colorCircle(positionX,positionY,radious,drawColor) {
+  canvasContext.fillStyle = drawColor;
+  canvasContext.beginPath();
+  canvasContext.arc(positionX,positionY,radious,Math.PI*2,true,drawColor);
+  canvasContext.fill()
+}
+}
+function colorRect(leftX,topY, width,height,drawColor) {
+  canvasContext.fillStyle = drawColor;
+  canvasContext.fillRect(leftX,topY, width,height);
+}
+</script>
+</section>
+
+
+  <!-- Features -->
+
+  <section id="features">
+    <div class="row">
+      <div class="col-lg-4 column">
+        <i class="fas fa-check-circle check-sign fa-4x"></i>
+
+        <h3 class="features-font">Easy to use.</h3>
+        <p class="Introduction">So easy to use, even your baby could do it.</p>
+      </div>
+      <div class="col-lg-4 column">
+        <i class="fas fa-bullseye bullseye-sign fa-4x"></i>
+
+        <h3 class="features-font">Elite Clientele</h3>
+        <p class="Introduction">We have all the people, the greatest people.</p>
+      </div>
+      <div class="col-lg-4 column">
+        <i class="fas fa-heart heart-sign fa-4x"></i>
+
+        <h3 class="features-font">Guaranteed to work.</h3>
+        <p class="Introduction">Find the love for this game or take your money back.</p>
+
+      </div>
+    </div>
+
+  </section>
+
+
+
+
+  <!-- Testimonials -->
+
+  <section id="testimonials">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="..." alt="">
+          <h2>I no longer have to play other shitty games. I've found the hottest game on the internet</h2>
+          <img class="testimonial-image" src="static/images/Man.jpg" alt="man-profile">
+          <em>Pebbles, New York</em>
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="..." alt="">
+          <h2 class="testimonial-text">I used to be lonely but now i have the best game.</h2>
+          <img class="testimonial-image" src="static/images/lady-img.jpg" alt="lady-profile">
+          <em>Beverly, Illinois</em>
+        </div>
+
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+
+      </a>
+    </div>
+
+  </section>
+
+
+  <!-- Press -->
+
+  <section id="press">
+    <img class="Some-photo" src="static/images/techcrunch.png" alt="tc-logo">
+    <img class="Some-photo" src="static/images/tnw.png" alt="tnw-logo">
+    <img class="Some-photo" src="static/images/bizinsider.png" alt="biz-insider-logo">
+    <img class="Some-photo" src="static/images/mashable.png" alt="mashable-logo">
+
+  </section>
+
+
+  <!-- Pricing -->
+
+  <section id="pricing">
+    <section class="Header-Subscription">
+
+
+      <h2>A Plan for Every Man Needs</h2>
+      <p class="Introduction">Simple and affordable price plans for your.</p>
+    </section>
+
+
+    <div class="container">
+      <div class="row ">
+        <!-- Free Tier -->
+        <div class="col-lg-4">
+          <div class="card mb-5 mb-lg-0">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center">First</h5>
+              <h6 class="card-price text-center">Free</h6>
+              <hr>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>5 Update Per Day</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>10 New Players Per Day</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited App Usage</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
+
+              </ul>
+              <a href="#" class="btn btn-block btn-secondary text-uppercase">Sign up</a>
+            </div>
+          </div>
+        </div>
+        <!-- Plus Tier -->
+        <div class="col-lg-4">
+          <div class="card mb-5 mb-lg-0">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center">Second</h5>
+              <h6 class="card-price text-center">$9<span class="period">/month</span></h6>
+              <hr>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>Unlimited Matches</strong></li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Support</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited App Usage</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
+
+
+
+              </ul>
+              <a href="#" class="btn btn-block btn-dark text-uppercase btn-singup">Sign up</a>
+            </div>
+          </div>
+        </div>
+        <!-- Pro Tier -->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-muted text-uppercase text-center">Unlimited</h5>
+              <h6 class="card-price text-center">$49<span class="period">/month</span></h6>
+              <hr>
+              <ul class="fa-ul">
+                <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>Unlimited Users</strong></li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Pirority Listing</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
+                <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Updates</li>
+
+
+
+              </ul>
+              <a href="#" class="btn btn-block btn-dark text-uppercase">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </section>
+
+
+  <!-- Call to Action -->
+
+  <section id="cta">
+
+    <h3>Play the best games on the internet. Right now.</h3>
+    <button type="button" class="btn btn-dark btn-lg download-button"><i class="fab fa-apple"></i> Download</button>
+    <button type="button" class="btn btn-outline-dark btn-lg download-button"><i class="fab fa-google-play"></i> Download</button>
+
+  </section>
+
+
+
+  <!-- Footer -->
+
+  <footer id="footer">
+    <i class="footer-button fab fa-twitter"></i>
+    <i class="footer-button fab fa-facebook-f"></i>
+    <i class="footer-button fab fa-instagram"></i>
+    <i class="footer-button fas fa-envelope"></i>
+
+    <p>© Copyright 2018</p>
+
+  </footer>
