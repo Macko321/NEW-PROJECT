@@ -1,2 +1,5 @@
-Projekt 'fUTURE'. Dla fascynatów gier z lat 80'.
-Wykonał Maciej Buciński i Nikodem Pustuła
+Project 'fUTURE'.
+
+Made mainly for web development trening and grade great score at University :)
+  
+Made by Maciej Buciński and Nikodem Pustuła
